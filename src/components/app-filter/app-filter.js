@@ -3,24 +3,30 @@ import { Component } from 'react';
 import './app-filter.css';
 
 class AppFilter extends Component {
+
     render() {
+        const buttonsData = [
+            {name: "", text: "Все сотрдники"},
+            {name: "rise", text: "На повышение"},
+            {name: "salary>1000", text: "З/П больше 1000$"}
+        ];
+
+
+        const buttons = buttonsData.map(({name, text}) => {
+            const activeClass = this.props.filter === name ? "btn btn-light" : "btn btn-outline-light";
+            return (
+                <button 
+                    className={activeClass}
+                    key={name}
+                    onClick={() => this.props.onFilter(name)}
+                    type="button">
+                    {text}
+                </button>
+            );
+        });
         return (
             <div className="btn-group">
-                <button 
-                    className="btn btn-light" 
-                    type="button">
-                        Все сотрдники
-                </button>
-                <button 
-                    className="btn btn-outline-light" 
-                    type="button">
-                        На повышение
-                </button>
-                <button 
-                    className="btn btn-outline-light" 
-                    type="button">
-                        З/П больше 1000$
-                </button>
+                {buttons}
             </div>
         );
     }
